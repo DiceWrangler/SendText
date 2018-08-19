@@ -4,7 +4,6 @@
 Module SendText
 
     Dim gShutdownRequested As Boolean
-    Dim gDBConn As SqlConnection
     Dim gCycleInterval As Integer
     Dim gEmailToUse As String
     Dim gTestEmail As String
@@ -13,7 +12,7 @@ Module SendText
     Dim gHeartbeat As Integer
 
     Const APP_NAME As String = "SendText"
-    Const APP_VERSION As String = "v180708"
+    Const APP_VERSION As String = "v180819"
 
     Const EMAIL_TO_USE_LIVE As String = "LIVE"
     Const EMAIL_TO_USE_TEST As String = "TEST"
@@ -288,12 +287,12 @@ MAIN_EXIT:
         gTestEmail = GetAppConfig(APP_NAME, "Test_Email", "7208403074@messaging.sprintpcs.com")  ' Default to Scott Thorne's SMS email address
         LogMessage("Config: Test_Email: " & gTestEmail)
 
-        If UCase(GetAppConfig(APP_NAME, "Output", OUTPUT_DRAFT)) = OUTPUT_SEND Then
-            gOutput = OUTPUT_SEND ' Send messages
-        Else
-            gOutput = OUTPUT_DRAFT ' Create draft only
-        End If
-        LogMessage("Config: Output: " & gOutput)
+        'If UCase(GetAppConfig(APP_NAME, "Output", OUTPUT_DRAFT)) = OUTPUT_SEND Then
+        gOutput = OUTPUT_SEND ' Send messages
+        'Else
+        '    gOutput = OUTPUT_DRAFT ' Create draft only
+        'End If
+        LogMessage("Config: Output: " & gOutput & "(hard-coded; ignoring AppConfig)")
 
         If UCase(GetAppConfig(APP_NAME, "Process", PROCESS_FIRST)) = PROCESS_ALL Then
             gProcess = PROCESS_ALL ' All messages
