@@ -12,7 +12,7 @@ Module SendText
     Dim gHeartbeat As Integer
 
     Const APP_NAME As String = "SendText"
-    Const APP_VERSION As String = "v180819"
+    Const APP_VERSION As String = "v180831"
 
     Const EMAIL_TO_USE_LIVE As String = "LIVE"
     Const EMAIL_TO_USE_TEST As String = "TEST"
@@ -292,7 +292,7 @@ MAIN_EXIT:
         'Else
         '    gOutput = OUTPUT_DRAFT ' Create draft only
         'End If
-        LogMessage("Config: Output: " & gOutput & "(hard-coded; ignoring AppConfig)")
+        LogMessage("Config: Output: " & gOutput & " (hard-coded; ignoring App_Config)")
 
         If UCase(GetAppConfig(APP_NAME, "Process", PROCESS_FIRST)) = PROCESS_ALL Then
             gProcess = PROCESS_ALL ' All messages

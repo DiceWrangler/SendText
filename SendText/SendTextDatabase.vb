@@ -14,7 +14,7 @@ Module SendTextDatabase
 
         Try
 
-            '            gDBConn = New SqlConnection("Initial Catalog=SendText;Data Source=localhost;Integrated Security=SSPI;MultipleActiveResultSets=True;")
+            '   gDBConn = New SqlConnection("Initial Catalog=SendText;Data Source=localhost;Integrated Security=SSPI;MultipleActiveResultSets=True;")
             lConnectionString = ConfigurationManager.ConnectionStrings("SendText").ConnectionString
             gDBConn = New SqlConnection(lConnectionString)
             gDBConn.Open()
