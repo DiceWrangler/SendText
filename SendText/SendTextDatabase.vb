@@ -14,7 +14,6 @@ Module SendTextDatabase
 
         Try
 
-            '            gDBConn = New SqlConnection("Initial Catalog=SendText;Data Source=localhost;Integrated Security=SSPI;MultipleActiveResultSets=True;")
             lConnectionString = ConfigurationManager.ConnectionStrings("SendText").ConnectionString
             gDBConn = New SqlConnection(lConnectionString)
             gDBConn.Open()
@@ -450,4 +449,35 @@ Module SendTextDatabase
 
     End Function
 
+
+    Public Sub UpdateAppStatus(pAppStatus As String)
+
+        Dim lCmd As New SqlCommand
+
+        Try
+
+            lCmd = gDBConn.CreateCommand
+
+            lCmd.CommandText = "UpdateAppStatus"
+            lCmd.CommandType = CommandType.StoredProcedure
+
+            lCmd.Parameters.Add("@AppName", SqlDbType.Char)
+            lCmd.Parameters("@AppName").Value = APP_NAME
+            lCmd.Parameters.Add("@AppStatus", SqlDbType.Char)
+            lCmd.Parameters("@AppStatus").Value = pAppStatus
+
+            lCmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+
+            LogMessage("*** ERROR *** UpdateAppStatus: " & ex.ToString)
+
+        Finally
+
+            lCmd.Dispose()
+            lCmd = Nothing
+
+        End Try
+
+    End Sub
 End Module

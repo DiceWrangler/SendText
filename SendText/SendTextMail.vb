@@ -124,7 +124,6 @@
             lSubjectLine = FormatSubjectLine(lSubject, lMessagePartIdx, lNumMessageParts, pMessageID)
             lBody = lMessagePart(lMessagePartIdx)
 
-            'lError = OutlookSend(pTo, lSubjectLine, lBody, pSend)
             lError = SendDBMail(pTo, lSubjectLine, lBody, pSend)
             If lError <> 0 Then Exit For ' Stop processing this message if an error encounter when sending it
 

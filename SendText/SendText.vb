@@ -4,7 +4,6 @@
 Module SendText
 
     Dim gShutdownRequested As Boolean
-    Dim gDBConn As SqlConnection
     Dim gCycleInterval As Integer
     Dim gEmailToUse As String
     Dim gTestEmail As String
@@ -12,8 +11,8 @@ Module SendText
     Dim gProcess As String
     Dim gHeartbeat As Integer
 
-    Const APP_NAME As String = "SendText"
-    Const APP_VERSION As String = "v180708"
+    Public Const APP_NAME As String = "SendText"
+    Const APP_VERSION As String = "v180902"
 
     Const EMAIL_TO_USE_LIVE As String = "LIVE"
     Const EMAIL_TO_USE_TEST As String = "TEST"
@@ -38,6 +37,10 @@ Module SendText
     Const MESSAGE_STATUS_STARTED As String = "S"
     Const MESSAGE_STATUS_FINISHED As String = "F"
     Const MESSAGE_STATUS_ERROR As String = "E"
+
+    Const APP_STATUS_START As String = "Starting"
+    Const APP_STATUS_HEARTBEAT As String = "Running"
+    Const APP_STATUS_SHUTDOWN As String = "Stopping"
 
 
     Sub Main()
@@ -127,6 +130,8 @@ MAIN_EXIT:
         gHeartbeat = (gHeartbeat + 1) Mod 80
         If gHeartbeat = 0 Then Console.WriteLine() ' Line break after 80 characters
 
+        UpdateAppStatus(APP_STATUS_HEARTBEAT)
+
     End Sub
 
 
@@ -169,7 +174,6 @@ MAIN_EXIT:
         End If
 
         lMessages.Close()
-        'OutlookFlush()
 
         lRecord = Nothing
         lMessages = Nothing
@@ -248,8 +252,7 @@ MAIN_EXIT:
         lError = DBOpen()
         If lError <> 0 Then lAnyError = -1 'If we cannot open the database, flag the error but keep going in case there are more errors during initialization
 
-        'lError = OutlookOpen()
-        'If lError <> 0 Then lAnyError = -1 'If we cannot open the mail client, flag the error but keep going in case there are more errors during initialization
+        UpdateAppStatus(APP_STATUS_START)
 
         SendTextStartup = lAnyError
 
@@ -259,8 +262,8 @@ MAIN_EXIT:
     Sub SendTextShutdown()
 
         LogMessage(APP_NAME & ": Shutting down")
+        UpdateAppStatus(APP_STATUS_SHUTDOWN)
 
-        'OutlookClose()
         DBClose()
 
     End Sub
