@@ -291,12 +291,12 @@ MAIN_EXIT:
         gTestEmail = GetAppConfig(APP_NAME, "Test_Email", "7208403074@messaging.sprintpcs.com")  ' Default to Scott Thorne's SMS email address
         LogMessage("Config: Test_Email: " & gTestEmail)
 
-        If UCase(GetAppConfig(APP_NAME, "Output", OUTPUT_DRAFT)) = OUTPUT_SEND Then
-            gOutput = OUTPUT_SEND ' Send messages
-        Else
-            gOutput = OUTPUT_DRAFT ' Create draft only
-        End If
-        LogMessage("Config: Output: " & gOutput)
+        'If UCase(GetAppConfig(APP_NAME, "Output", OUTPUT_DRAFT)) = OUTPUT_SEND Then
+        gOutput = OUTPUT_SEND ' Send messages
+        'Else
+        '    gOutput = OUTPUT_DRAFT ' Create draft only
+        'End If
+        LogMessage("Config: Output: " & gOutput & " (hard-coded; ignoring App_Config)")
 
         If UCase(GetAppConfig(APP_NAME, "Process", PROCESS_FIRST)) = PROCESS_ALL Then
             gProcess = PROCESS_ALL ' All messages
