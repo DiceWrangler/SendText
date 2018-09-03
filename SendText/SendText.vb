@@ -12,7 +12,7 @@ Module SendText
     Dim gHeartbeat As Integer
 
     Public Const APP_NAME As String = "SendText"
-    Const APP_VERSION As String = "v180902"
+    Const APP_VERSION As String = "v180903"
 
     Const EMAIL_TO_USE_LIVE As String = "LIVE"
     Const EMAIL_TO_USE_TEST As String = "TEST"
