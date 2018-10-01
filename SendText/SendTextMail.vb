@@ -2,7 +2,7 @@
 
     Const MAX_SUBJECT_LENGTH As Integer = 26
     Const MAX_MESSAGE_LENGTH As Integer = 113
-    Const MAX_MESSAGE_PARTS As Integer = 10
+    Const MAX_MESSAGE_PARTS As Integer = 100
 
 
     Private Function GetSubjectLength(pSubject As String) As Integer
